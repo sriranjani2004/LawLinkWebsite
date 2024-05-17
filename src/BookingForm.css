@@ -1,0 +1,106 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.booking-form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 50px; /* Padding to ensure space within the container */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visibility */
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Form group label */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input fields */
+input[type='text'],
+input[type='date'],
+textarea {
+  width: calc(100% - 20px); /* Ensures input fields take full width minus padding */
+  padding: 10px; /* Ensures padding inside the input fields */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Textarea */
+textarea {
+  height: 100px;
+}
+
+/* Submit button */
+button {
+  background-color: #ade4f1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #84ede3;
+}
+
+/* Success message */
+.success-message {
+  margin-top: 20px;
+  color: rgb(115, 204, 219);
+  font-weight: bold;
+}
+
+/* Modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #a5e9de;
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #0d1312;
+  width: 20%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

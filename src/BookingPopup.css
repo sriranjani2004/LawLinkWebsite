@@ -1,0 +1,48 @@
+.booking-popup {
+    position: fixed; /* Overlays the main content */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Covers entire viewport height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .popup-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  .popup-content p {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button[disabled] {
+    background-color: #ddd;
+    cursor: default;
+  }
+  

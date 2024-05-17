@@ -1,0 +1,58 @@
+.lawyers-page {
+    text-align: center;
+  }
+  
+  .lawyer-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* To evenly distribute columns */
+  }
+  
+  .lawyer {
+    width: calc(33.33% - 50px); /* Adjust as needed for margin */
+    margin: 20px 10px; /* Adjust margin as needed */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding doesn't increase width */
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .lawyer-info {
+    margin-bottom: 20px;
+  }
+  
+  .lawyer img {
+    max-width: 100%; /* Adjust the maximum width of the image */
+    max-height: 100px; /* Adjust the maximum height of the image */
+  }
+  
+  .lawyer h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+  }
+  
+  .lawyer p {
+    margin: 5px 0;
+  }
+  
+  .lawyer-details {
+    margin-top: 20px;
+  }
+  
+  .lawyer button {
+    padding: 10px 20px;
+    background-color: #99ffdd;
+    color: #1a1717;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .lawyer button:hover {
+    background-color: #36cd9a;
+  }
+  

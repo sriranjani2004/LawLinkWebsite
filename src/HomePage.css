@@ -1,0 +1,96 @@
+/* Navbar Styles */
+.navbar {
+  height: 60px;
+  background-color: #fef7e5;
+  position: relative;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-elements ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.nav-elements ul li:not(:last-child) {
+  margin-right: 60px;
+}
+
+.nav-elements ul a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2f234f;
+  text-decoration: none;
+  position: relative;
+}
+
+/* Navbar Hover Effect */
+.nav-elements ul a:hover {
+  color: #574c4c; /* Change text color on hover */
+}
+
+/* Active Link Effect */
+.nav-elements ul a.active {
+  color: #574c4c; /* Change text color for active link */
+}
+
+.nav-elements ul a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #090202; /* Underline color for active link */
+}
+
+/* Homepage Styles */
+.home-page {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  width: 95%; /* Occupy full page width */
+}
+
+/* Right Section Styles */
+.right-section {
+  flex: 2;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Left Section Styles */
+.left-section {
+  flex: 1;
+}
+
+/* Image Styles */
+.lawyers-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Heading Styles */
+.right-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Paragraph Styles */
+.right-section p {
+  font-size: 16px;
+  line-height: 1.5;
+}
