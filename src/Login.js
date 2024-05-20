@@ -1,74 +1,64 @@
 import React, { useState } from 'react';
-import './Login.css'; 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import './CustomLogin.css'; // Import your CSS file
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    alert(`Email: ${email}, Password: ${password}`); // Simulate login
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        // Check for admin credentials
+        if (email === 'admin@gmail.com' && password === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/home');
+        }
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Login failed');
+    }
   };
 
   return (
-    <div>
-      <nav className="navbar">
-        <div className="container">
-          <div>
-            <h1>LawLink</h1>
-          </div>
-          <div className="nav-elements">
-            <ul className="menu3">
-              <li>
-                <NavLink exact to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/lawyers">Lawyers</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about">About</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/register">Register</NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact">Contact</NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      
-      <div className="login-container">
-        <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Enter your email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="password">Enter your password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">SIGN IN</button>
-        </form>
-        <p className="forgot-password">Forgot Password?</p>
-        <p>Not a user? Register</p>
-      </div>
+    <div className="custom-login-container">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      <p>Not Registered? <NavLink to="/">Sign Up</NavLink></p>
     </div>
   );
-}
+};
 
 export default Login;

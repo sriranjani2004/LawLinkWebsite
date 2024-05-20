@@ -84,7 +84,7 @@ const Register = () => {
           />
           <button type="submit">SIGN UP</button>
         </form>
-        <p>Already a user? <NavLink to="/login">Log in</NavLink></p>
+        <p>Already a user? <NavLink to="/">Log in</NavLink></p>
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ const About = () => {
           <div className="nav-elements">
             <ul className="menu3">
               <li>
-                <NavLink exact to="/">Home</NavLink>
+                <NavLink exact to="/home">Home</NavLink>
               </li>
               <li>
                 <NavLink to="/lawyers">Lawyers</NavLink>
@@ -74,10 +74,10 @@ const About = () => {
                 <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/ChatPage">Chatbot</NavLink> {/* Add this line */}
               </li>
               <li>
-                <NavLink to="/register">Register</NavLink>
+                <NavLink to="/">logout</NavLink>
               </li>
               <li>
                 <NavLink to="/contact">Contact</NavLink>

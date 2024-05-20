@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom';
 import './BookingForm.css'; // Import CSS file for styling
 
 const BookingForm = () => {
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     dob: '',
@@ -11,27 +11,72 @@ const BookingForm = () => {
     caseDescription: '',
     dateOfAppointment: ''
   });
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State to control the visibility of the success message
+  const [errors, setErrors] = useState({});
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to server)
-    console.log(formData);
-    // Show the success message
-    setShowSuccessMessage(true);
-    // Redirect to lawyers page after a delay
-    setTimeout(() => {
-      navigate('/lawyers'); // Redirect to the lawyers page
-    }, 2000); // Adjust the delay as needed (e.g., 2000ms = 2 seconds)
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const response = await fetch('http://localhost:5000/bookappointment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          setShowSuccessMessage(true);
+          setTimeout(() => {
+            setShowSuccessMessage(false);
+            navigate('/lawyers'); // Navigate to lawyers page after 3 seconds
+          }, 3000); // Redirect after 3 seconds
+        } else {
+          console.error('Failed to submit booking');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    } else {
+      setErrors(validationErrors);
+    }
   };
 
-  const closeModal = () => {
-    setShowSuccessMessage(false);
+  const validateForm = (data) => {
+    let errors = {};
+
+    // Name validation
+    if (!data.name.trim()) {
+      errors.name = 'Name is required';
+    }
+
+    // Age validation (must be at least 18 years old)
+    const today = new Date();
+    const dob = new Date(data.dob);
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDifference = today.getMonth() - dob.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      errors.dob = 'You must be at least 18 years old';
+    }
+
+    // Appointment date validation (must be in the future)
+    const appointmentDate = new Date(data.dateOfAppointment);
+    if (appointmentDate <= today) {
+      errors.dateOfAppointment = 'Appointment date must be in the future';
+    }
+
+    return errors;
   };
 
   return (
@@ -48,6 +93,7 @@ const BookingForm = () => {
               onChange={handleChange}
               required
             />
+            {errors.name && <span className="error">{errors.name}</span>}
           </div>
           <div className="form-group">
             <label>Date of Birth:</label>
@@ -58,6 +104,7 @@ const BookingForm = () => {
               onChange={handleChange}
               required
             />
+            {errors.dob && <span className="error">{errors.dob}</span>}
           </div>
           <div className="form-group">
             <label>Place:</label>
@@ -68,6 +115,7 @@ const BookingForm = () => {
               onChange={handleChange}
               required
             />
+            {errors.place && <span className="error">{errors.place}</span>}
           </div>
           <div className="form-group">
             <label>Case Description:</label>
@@ -77,6 +125,7 @@ const BookingForm = () => {
               onChange={handleChange}
               required
             ></textarea>
+            {errors.caseDescription && <span className="error">{errors.caseDescription}</span>}
           </div>
           <div className="form-group">
             <label>Date of Appointment:</label>
@@ -87,6 +136,7 @@ const BookingForm = () => {
               onChange={handleChange}
               required
             />
+            {errors.dateOfAppointment && <span className="error">{errors.dateOfAppointment}</span>}
           </div>
           <button type="submit">Submit</button>
         </form>
@@ -95,8 +145,8 @@ const BookingForm = () => {
       {showSuccessMessage && (
         <div className="modal" style={{ display: showSuccessMessage ? 'block' : 'none' }}>
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <p>Booking is successful!</p>
+            <span className="close" onClick={() => setShowSuccessMessage(false)}>&times;</span>
+            <p>Booking is successful! Email has been sent.</p>
           </div>
         </div>
       )}

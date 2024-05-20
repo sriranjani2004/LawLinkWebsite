@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './HomePage.css';
-import lawyersImage from './lawyers_image.jpg'; 
+import './AdminPage.css';
+import lawyersImage from './lawyers_image.jpg'; // Import your lawyers image
 
-
-const HomePage = () => {
+const AdminPage = () => {
   return (
     <div>
       <nav className="navbar">
@@ -20,20 +19,16 @@ const HomePage = () => {
                 <NavLink exact to="/home">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/lawyers">Lawyers</NavLink>
+                <NavLink to="/AddlawyersPage">Add Lawyers</NavLink>
               </li>
+              
               <li>
-                <NavLink to="/about">About</NavLink>
-              </li>
-              <li>
-                <NavLink to="/ChatPage">Chatbot</NavLink> {/* Add this line */}
+                <NavLink to="/BookingList">Booking List</NavLink> {/* Add this line */}
               </li>
               <li>
                 <NavLink to="/">logout</NavLink>
               </li>
-              <li>
-                <NavLink to="/contact">Contact</NavLink>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -57,4 +52,4 @@ const HomePage = () => {
   );
 }
 
-export default HomePage;
+export default AdminPage;

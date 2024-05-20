@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './ContactPage.css';
 import { NavLink } from 'react-router-dom';
+import './ContactPage.css';
 
 function ContactPage() {
   const [name, setName] = useState('');
@@ -8,13 +8,30 @@ function ContactPage() {
   const [message, setMessage] = useState('');
   const [subject, setSubject] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`Name: ${name}, Email: ${email}, Subject: ${subject}, Message: ${message}`);
-    setName('');
-    setEmail('');
-    setMessage('');
-    setSubject('');
+    try {
+      const response = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+
+      if (response.ok) {
+        alert('Message sent successfully');
+        setName('');
+        setEmail('');
+        setMessage('');
+        setSubject('');
+      } else {
+        alert('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send message');
+    }
   };
 
   return (
@@ -27,7 +44,7 @@ function ContactPage() {
           <div className="nav-elements">
             <ul className="menu3">
               <li>
-                <NavLink exact to="/">Home</NavLink>
+                <NavLink exact to="/home">Home</NavLink>
               </li>
               <li>
                 <NavLink to="/lawyers">Lawyers</NavLink>
@@ -36,10 +53,10 @@ function ContactPage() {
                 <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/ChatPage">Chatbot</NavLink> {/* Add this line */}
               </li>
               <li>
-                <NavLink to="/register">Register</NavLink>
+                <NavLink to="/">logout</NavLink>
               </li>
               <li>
                 <NavLink to="/contact">Contact</NavLink>
@@ -48,7 +65,7 @@ function ContactPage() {
           </div>
         </div>
       </nav>
-      
+
       <div className="contact-page">
         <h1>Contact Us</h1>
         <form onSubmit={handleSubmit}>

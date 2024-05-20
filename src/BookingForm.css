@@ -43,19 +43,21 @@ textarea {
   height: 100px;
 }
 
+
 /* Submit button */
 button {
-  background-color: #ade4f1;
+  background-color: #ee5b44;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 10px; /* Add margin to the right side of each button */
 }
 
 /* Button hover effect */
 button:hover {
-  background-color: #84ede3;
+  background-color: #edaa84;
 }
 
 /* Success message */
