@@ -14,7 +14,7 @@ function BookingList() {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/bookings');
+      const response = await axios.get('https://lawlinkbackend.onrender.com/bookings');
       setBookings(response.data);
       setLoading(false);
     } catch (error) {

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'; // Assuming you're using React Route
 import io from 'socket.io-client';
 import './ChatApp.css'; // Import the CSS file
 
-const socket = io('http://localhost:5000'); // Replace with your server URL
+const socket = io('https://lawlinkbackend.onrender.com'); // Replace with your server URL
 
 function ChatApp() {
   const [messages, setMessages] = useState([]);

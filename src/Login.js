@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('https://lawlinkbackend.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         // Check for admin credentials
-        if (email === 'admin@gmail.com' && password === 'admin') {
+        if (email === 'admin1@gmail.com' && password === 'admin') {
           navigate('/admin');
         } else {
           navigate('/home');
